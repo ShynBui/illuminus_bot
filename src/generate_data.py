@@ -13,6 +13,7 @@ load_dotenv()
 executor = QuotaManager(model_name=os.getenv('LLM_MODEL_'), api_keys=eval(os.getenv('LIST_GEMINI_API_KEY')))
 config_path = os.path.join(os.path.dirname(os.getcwd()), 'config', 'generate_data_config.json')
 train_data_path = os.path.join(os.path.dirname(os.getcwd()), 'data', 'train_data.json')
+test_data_path = os.path.join(os.path.dirname(os.getcwd()), 'data', 'test_data.json')
 
 # Function to choose a random value based on weighted probability
 def weighted_choice(choices):
@@ -90,5 +91,10 @@ def generate_and_save_data(output_path=train_data_path, config_path=config_path)
 
 # Call the function
 if __name__ == '__main__':
-    for i in range(10):
+    #Generate data_train
+    for i in range(100):
         generate_and_save_data()
+
+    #Generate data_test
+    for i in range(10):
+        generate_and_save_data(output_path=test_data_path)
