@@ -1,0 +1,34 @@
+{
+  "Choi's Emotion": {
+    "comforting": 0.2,
+    "supportive": 0.2,
+    "nostalgic": 0.2,
+    "joyful": 0.2,
+    "patient": 0.2
+  },
+  "David's Emotion": {
+    "warm": 0.2,
+    "confused": 0.2,
+    "worried": 0.2,
+    "sad": 0.2,
+    "humorous": 0.2
+  },
+  "Conversation Topic": {
+    "Choi's childhood memories": 0.2,
+    "David's old job in the U.S.": 0.2,
+    "David's early days in Korea": 0.2,
+    "David's current health": 0.2,
+    "Choi's achievements in research": 0.2
+  },
+  "Language": {
+    "English": 0.3,
+    "Korean": 0.3,
+    "Mixed English-Korean": 0.4
+  },
+  "Choi's Role": {
+    "Son": 0.25,
+    "Doctor": 0.25,
+    "Humorous storyteller": 0.25,
+    "Motivational speaker": 0.25
+  }
+}
