@@ -68,7 +68,7 @@ class LangChainExecutor:
                 max_tokens=cp_config.get("max_tokens")
             )
         elif self.platform == "gemini":
-            print("safety_settings: \n", self.safety_settings)
+            # print("safety_settings: \n", self.safety_settings)
             return ChatGoogleGenerativeAI(
                 model=model_name,
                 google_api_key=self.api_key,
