@@ -26,7 +26,7 @@ def process_request_batch_target(executor_instance, batch, result_queue):
             pass  # Tương tác với futures nếu cần, hiện tại chỉ để đảm bảo futures được hoàn thành
 
 
-class QuotaManager(LangChainExecutor): #TOdo Custom stack
+class QuotaManager(LangChainExecutor):
     def __init__(self, model_name, api_keys):
         """
         Khởi tạo QuotaManager với danh sách các API key.
