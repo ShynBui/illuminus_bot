@@ -92,9 +92,9 @@ def generate_and_save_data(output_path=train_data_path, config_path=config_path)
 # Call the function
 if __name__ == '__main__':
     #Generate data_train
-    for i in range(100):
+    for i in range(400):
         generate_and_save_data()
 
-    #Generate data_test
+    # #Generate data_test
     for i in range(10):
         generate_and_save_data(output_path=test_data_path)
