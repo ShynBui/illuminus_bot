@@ -3,10 +3,14 @@ import json
 import os
 from huggingface_hub import InferenceClient
 from src.chatbot import get_conversation
-from src import load_config_and_select, analysis_message, check_if_have_infor, gen_long_term_memory, load_long_term_memory
+from src import load_config_and_select, analysis_message, check_if_have_infor, gen_long_term_memory, load_long_term_memory, load_conversation, create_or_load_vectorstore_and_retriever
 
 # Đường dẫn đến file lưu lịch sử cuộc trò chuyện
 conversation_file_path = os.path.join(os.getcwd(), 'data', 'conversation_data.json')
+
+#Load những đoạn hôi thoại mẫu
+conversation_data = load_conversation()
+_, retriever = create_or_load_vectorstore_and_retriever(conversation_data, update=False)
 
 
 def load_last_conversation():
@@ -52,19 +56,11 @@ def respond(
                            'Language': None,
                            "Choi's Role": None}
 
-    # Nếu kích hoạt tính năng retrieve, tiến hành truy vết các hội thoại từ database conversation_data.json
-    if retrieve_old_conversation:
-        previous_context = "No previous context available"
-        david_last_conversation = ""
-        choi_last_conversation = ""
-    else:
-        last_conversation = load_last_conversation()
-        previous_context = last_conversation['previous_context'] if last_conversation else "No previous context available"
-        david_last_conversation = last_conversation['conversation'][0]['text'] if last_conversation else ""
-        choi_last_conversation = last_conversation['conversation'][1]['text'] if last_conversation else ""
 
-
-
+    last_conversation = load_last_conversation()
+    previous_context = last_conversation['previous_context'] if last_conversation else "No previous context available"
+    david_last_conversation = last_conversation['conversation'][0]['text'] if last_conversation else ""
+    choi_last_conversation = last_conversation['conversation'][1]['text'] if last_conversation else ""
 
     # Tạo config từ các lựa chọn được chọn trong giao diện Gradio
     my_config = {
@@ -81,6 +77,21 @@ def respond(
     for item, value in message_analyse.items():
         if value:
             my_config[item] = value
+
+    # Nếu kích hoạt tính năng retrieve, tiến hành truy vết các hội thoại từ database test_data.json
+    if retrieve_old_conversation:
+        #Add more feature
+        data_query = f'''David ({my_config["David's Emotion"]}): {my_config["David_last_conversation"]}\nChoi: {my_config["Choi's Emotion"]}: {my_config["Choi_last_conversation"]}
+The conversation in: {language}
+Topic of Conversation: {conversation_topic}
+The previous context: {previous_context}
+'''
+        query_in_db = retriever.invoke(data_query)[0]
+        get_next_conversation_id = query_in_db.metadata['index']
+        # ToDO
+        my_config['exmaple_conversation'] = conversation_data[int(get_next_conversation_id)]
+    else:
+        pass
 
     # Gọi hàm get_conversation với cấu hình đã chọn
     long_term_json = load_long_term_memory()
