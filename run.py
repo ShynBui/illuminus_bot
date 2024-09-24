@@ -34,12 +34,13 @@ def save_conversation(conversation_entry):
 
 def respond(
         message,
-        history: list[str],  # Điều chỉnh định dạng history
+        history: list[str],
         choi_emotion,
         david_emotion,
         conversation_topic,
         language,
         choi_role,
+        retrieve_old_conversation,
 ):
     if message != '':  # Nếu người dùng gửi tin nhắn
         message_analyse = analysis_message(message)  # Phân tích tin nhắn
@@ -51,13 +52,19 @@ def respond(
                            'Language': None,
                            "Choi's Role": None}
 
-    # Đọc tin nhắn gần nhất để tạo context cho cuộc trò chuyện mới
-    last_conversation = load_last_conversation()
-    previous_context = last_conversation['previous_context'] if last_conversation else "No previous context available"
+    # Nếu kích hoạt tính năng retrieve, tiến hành truy vết các hội thoại từ database conversation_data.json
+    if retrieve_old_conversation:
+        previous_context = "No previous context available"
+        david_last_conversation = ""
+        choi_last_conversation = ""
+    else:
+        last_conversation = load_last_conversation()
+        previous_context = last_conversation['previous_context'] if last_conversation else "No previous context available"
+        david_last_conversation = last_conversation['conversation'][0]['text'] if last_conversation else ""
+        choi_last_conversation = last_conversation['conversation'][1]['text'] if last_conversation else ""
 
-    # Lấy đoạn hội thoại gần nhất của cả David và Choi
-    david_last_conversation = last_conversation['conversation'][0]['text'] if last_conversation else ""
-    choi_last_conversation = last_conversation['conversation'][1]['text'] if last_conversation else ""
+
+
 
     # Tạo config từ các lựa chọn được chọn trong giao diện Gradio
     my_config = {
@@ -107,7 +114,7 @@ def respond(
     }
     save_conversation(conversation_entry)
 
-    #Update long-term-memory:
+    # Update long-term-memory:
     check_important_info = check_if_have_infor(current_conversation)
     str_long_term_mem = '<h1> Long term Memory </h1>'
 
@@ -119,7 +126,6 @@ def respond(
     else:
         for item, value in long_term_json.items():
             str_long_term_mem += f'<b>{item}</b>: {value} <br>\n'
-
 
     # Hiển thị tin nhắn của David và Choi trong cùng một box
     combined_message = f"David: {current_conversation['David']}\n\nChoi: {current_conversation['Choi']}"
@@ -149,6 +155,8 @@ with gr.Blocks() as demo:
             choi_role = gr.Dropdown(choices=["Son", "Doctor", "Humorous storyteller", "Motivational speaker"],
                                     value="Son", label="Choi's Role")
 
+            retrieve_toggle = gr.Checkbox(label="Retrieve old conversation", value=False)
+
             submit_btn = gr.Button("Submit")
 
         # Cột bên phải: hiển thị tin nhắn của người dùng
@@ -174,7 +182,7 @@ with gr.Blocks() as demo:
 
     submit_btn.click(respond,
                      inputs=[message_input, chatbot, choi_emotion, david_emotion, conversation_topic, language,
-                             choi_role],
+                             choi_role, retrieve_toggle],  # Thêm retrieve_toggle vào đầu vào
                      outputs=[chatbot, user_message_display])
 
 if __name__ == "__main__":

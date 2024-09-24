@@ -34,10 +34,10 @@ class LangChainExecutor:
                 HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
             }
             self.default_config = {
-                "temperature": 0,
+                "temperature": 0.3,
                 "top_p": 0.95,
                 "top_k": 64,
-                "max_output_tokens": 1024,             
+                "max_output_tokens": 1024,
             }
 
     def create_model(self, model_name, cp_config):
