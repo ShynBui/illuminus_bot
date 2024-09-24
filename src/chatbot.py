@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def get_conversation(my_config=None):
+def get_conversation(long_term_memory, my_config=None):
 
     model_input = copy.deepcopy(david_choi_prompt['model_input'])
 
@@ -32,6 +32,7 @@ def get_conversation(my_config=None):
   "Language": "{my_config["Language"]}",
   "Choi's Role": "{my_config["Choi's Role"]}"
 }}\n'''
+    user_input += "Long term memory: \n" + str(long_term_memory) + '\n'
 
     user_input += f'Output in {my_config["Language"]}:\n'
 
