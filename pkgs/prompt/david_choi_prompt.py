@@ -38,6 +38,7 @@ The input will contain one pair of messages from **David** and **Choi**, and the
 Expected Output Format:
 Return the conversation in JSON format as:
 {
+  "summarize_context": <The summarized context of the previous conversation between David and Choi, capturing the emotional flow and key details of their interaction...>,
   "current_conversation": {
     "David": <David's message>,
     "Choi": <Choi's message>
@@ -61,6 +62,7 @@ Input:
 
 Output:
 {
+  "summarize_context": The conversation between David and Choi revolves around childhood memories of the beach. David, who has Alzheimer's, is confused about the event, and Choi comforts him, reminding him that they often went to the beach together, with David always holding Choi's hand to protect him from fear. Gradually, David remembers details about the waves and the feeling of safety when he was with his son.,
   "current_conversation": {
     "David": "I... I think I remember now. The waves, they were loud, but you weren’t scared. I remember holding your hand.",
     "Choi": "Yes, exactly, 아버지. You always made me feel safe. It was one of my favorite memories."

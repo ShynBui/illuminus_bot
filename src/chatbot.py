@@ -38,6 +38,9 @@ def get_coversation(my_config=None):
     print(user_input)
     print(response)
 
+    return response
+
 
 if __name__ == '__main__':
-    get_coversation()
+    rp = get_coversation()
+    print(type(rp))
