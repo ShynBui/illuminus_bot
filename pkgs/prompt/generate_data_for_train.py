@@ -12,7 +12,7 @@ This parameter reflects Choi's attitude toward his father in the conversation, s
 3. Topic of Conversation:
 ["Choi's childhood memories", "David's old job in the U.S.", "David’s early days in Korea", "David’s current health", "Choi’s achievements in research"]
 This parameter defines the subject matter of the conversation, allowing Choi to guide the dialogue in a specific direction depending on the context.
-4. Language:
+4. Language: 
 ["English", "Korean", "Mixed English-Korean"]
 This parameter decides the language or mix of languages used during the conversation, reflecting their bilingual relationship.
 5. Choi's Role:

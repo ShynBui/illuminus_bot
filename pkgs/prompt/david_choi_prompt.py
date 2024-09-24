@@ -1,4 +1,4 @@
-choi_david_prompt = {
+david_choi_prompt = {
 "model_input": """
 You are creating a human-like conversation between a father, **David**, who suffers from Alzheimer's, and his son, **Choi**. Your task is to simulate a dialogue where both characters express their emotions based on the following parameters. The conversation should feel natural, empathetic, and emotionally connected.
 
