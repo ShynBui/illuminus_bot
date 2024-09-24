@@ -33,7 +33,7 @@ def get_conversation(my_config=None):
   "Choi's Role": "{my_config["Choi's Role"]}"
 }}\n'''
 
-    user_input += "Output:\n"
+    user_input += f'Output in {my_config["Language"]}:\n'
 
     while True:
         try:

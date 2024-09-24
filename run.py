@@ -3,7 +3,7 @@ import json
 import os
 from huggingface_hub import InferenceClient
 from src.chatbot import get_conversation
-from src import load_config_and_select
+from src import load_config_and_select, analysis_message
 
 # Đường dẫn đến file lưu lịch sử cuộc trò chuyện
 conversation_file_path = os.path.join(os.getcwd(), 'data', 'conversation_data.json')
@@ -38,6 +38,16 @@ def respond(
     language,
     choi_role,
 ):
+    if message != '':
+        message_analyse = analysis_message(message)
+    else:
+        message_analyse = {'previous_context': None,
+                           "David's Emotion": None,
+                           "Choi's Emotion": None,
+                           'Topic of Conversation': None,
+                           'Language': None,
+                           "Choi's Role": None}
+
     # Đọc tin nhắn gần nhất để tạo context cho cuộc trò chuyện mới
     last_conversation = load_last_conversation()
     previous_context = last_conversation['previous_context'] if last_conversation else "No previous context available"
@@ -57,6 +67,10 @@ def respond(
         "David_last_conversation": david_last_conversation,
         "Choi_last_conversation": choi_last_conversation,
     }
+
+    for item, value in message_analyse.items():
+        if value:
+            my_config[item] = value
 
     # Gọi hàm get_conversation với cấu hình đã chọn
     response = get_conversation(my_config=my_config)
