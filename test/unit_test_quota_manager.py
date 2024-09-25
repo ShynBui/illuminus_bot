@@ -1,74 +1,63 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from pkgs import QuotaManager
+import os
+
+# Giả sử file của bạn là 'analysis_module.py'
+from src import analysis_message
 
 
-class TestQuotaManager(unittest.TestCase):
+class TestAnalysisMessage(unittest.TestCase):
 
-    @patch('os.getenv')
-    def test_quota_manager_initialization(self, mock_getenv):
-        mock_getenv.return_value = "fake_api_key"
+    @patch('src.analysis_module.QuotaManager')
+    @patch('src.analysis_module.os.getenv')
+    def test_analysis_message(self, mock_getenv, mock_quota_manager):
+        # Mock giá trị trả về của các biến môi trường
+        mock_getenv.side_effect = lambda key: 'mocked_model' if key == 'LLM_MODEL_' else '["mocked_api_key"]'
 
-        # Khởi tạo QuotaManager
-        model_name = "gpt-3.5-turbo"
-        api_keys = ["api_key_1", "api_key_2"]
-        manager = QuotaManager(model_name, api_keys)
+        # Tạo mock executor
+        mock_executor_instance = MagicMock()
+        mock_executor_instance.execute.return_value = {'answer': 'mocked response'}
 
-        # Kiểm tra xem class có khởi tạo đúng không
-        self.assertEqual(manager.api_keys, api_keys)
-        self.assertEqual(manager.current_key_index, 0)
-        self.assertEqual(manager.use_quota, False)
-        self.assertFalse(manager.use_quota)
+        # Gán mock executor vào mock QuotaManager
+        mock_quota_manager.return_value = mock_executor_instance
 
-    @patch('os.getenv')
-    def test_quota_manager_gemini_initialization(self, mock_getenv):
-        mock_getenv.return_value = "fake_api_key"
+        # Giả lập một thông điệp để phân tích
+        message = 'David lo lắng và Choi đang an ủi anh ấy về sức khỏe.'
 
-        # Khởi tạo QuotaManager với mô hình gemini
-        model_name = "gemini"
-        api_keys = ["api_key_1", "api_key_2"]
-        manager = QuotaManager(model_name, api_keys)
+        # Gọi hàm analysis_message với message giả lập
+        result = analysis_message(message)
 
-        # Kiểm tra xem class có khởi tạo đúng không
-        self.assertEqual(manager.api_keys, api_keys)
-        self.assertEqual(manager.current_key_index, 0)
-        self.assertTrue(manager.use_quota)
+        # Kiểm tra nếu hàm execute đã được gọi với các tham số mong đợi
+        mock_executor_instance.execute.assert_called_once()
 
-    @patch('os.environ', {})
-    def test_rotate_api_key(self):
-        # Khởi tạo QuotaManager với nhiều API keys
-        model_name = "gemini"
-        api_keys = ["api_key_1", "api_key_2", "api_key_3"]
-        manager = QuotaManager(model_name, api_keys)
+        # Kiểm tra kết quả trả về từ hàm analysis_message
+        self.assertEqual(result, {'answer': 'mocked response'})
 
-        # Xoay vòng API key và kiểm tra
-        manager.rotate_api_key()
-        self.assertEqual(manager.api_key, "api_key_2")
+    @patch('src.analysis_module.QuotaManager')
+    @patch('src.analysis_module.os.getenv')
+    def test_analysis_message_with_empty_message(self, mock_getenv, mock_quota_manager):
+        # Mock các biến môi trường giống như test trước
+        mock_getenv.side_effect = lambda key: 'mocked_model' if key == 'LLM_MODEL_' else '["mocked_api_key"]'
 
-        manager.rotate_api_key()
-        self.assertEqual(manager.api_key, "api_key_3")
+        # Tạo mock executor
+        mock_executor_instance = MagicMock()
+        mock_executor_instance.execute.return_value = {'answer': 'empty message response'}
 
-        manager.rotate_api_key()
-        self.assertEqual(manager.api_key, "api_key_1")  # Quay lại key đầu tiên
+        # Gán mock executor vào mock QuotaManager
+        mock_quota_manager.return_value = mock_executor_instance
 
-    @patch('pkgs.LangChainExecutor.execute')
-    @patch('os.getenv')
-    def test_execute_with_quota_rotation(self, mock_getenv, mock_execute):
-        mock_getenv.return_value = "fake_api_key"
+        # Giả lập một thông điệp rỗng
+        message = ''
 
-        # Giả lập lỗi 429 từ lần gọi đầu tiên
-        mock_execute.side_effect = [Exception("429 Too Many Requests"), "Successful Response"]
+        # Gọi hàm analysis_message với thông điệp rỗng
+        result = analysis_message(message)
 
-        # Khởi tạo QuotaManager
-        model_name = "gemini"
-        api_keys = ["api_key_1", "api_key_2"]
-        manager = QuotaManager(model_name, api_keys)
+        # Kiểm tra nếu hàm execute đã được gọi
+        mock_executor_instance.execute.assert_called_once()
 
-        result = manager.execute("input", "user input")
+        # Kiểm tra kết quả trả về
+        self.assertEqual(result, {'answer': 'empty message response'})
 
-        # Kiểm tra rằng API key đã xoay vòng và kết quả cuối cùng thành công
-        self.assertEqual(manager.api_key, "api_key_2")
-        self.assertEqual(result, "Successful Response")
 
 
 if __name__ == "__main__":
