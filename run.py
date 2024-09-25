@@ -2,7 +2,7 @@ import gradio as gr
 import json
 import os
 from huggingface_hub import InferenceClient
-from src.chatbot import get_conversation
+from src.chatbot import get_conversation, get_conversation_with_retrieve
 from src import load_config_and_select, analysis_message, check_if_have_infor, gen_long_term_memory, load_long_term_memory, load_conversation, create_or_load_vectorstore_and_retriever
 
 # Đường dẫn đến file lưu lịch sử cuộc trò chuyện
@@ -10,6 +10,7 @@ conversation_file_path = os.path.join(os.getcwd(), 'data', 'conversation_data.js
 
 #Load những đoạn hôi thoại mẫu
 conversation_data = load_conversation()
+
 _, retriever = create_or_load_vectorstore_and_retriever(conversation_data, update=False)
 
 
@@ -86,17 +87,30 @@ The conversation in: {language}
 Topic of Conversation: {conversation_topic}
 The previous context: {previous_context}
 '''
-        query_in_db = retriever.invoke(data_query)[0]
-        get_next_conversation_id = query_in_db.metadata['index']
-        # ToDO
-        my_config['exmaple_conversation'] = conversation_data[int(get_next_conversation_id)]
+        try:
+            query_in_db = retriever.invoke(data_query)[0]
+            get_next_conversation_id = query_in_db.metadata['index']
+            print("simple_id:", get_next_conversation_id)
+            my_config['exmaple_conversation'] = conversation_data[int(get_next_conversation_id) + 1]
+        except Exception as e:
+            print("Lỗi: ",e)
+            print("Câu tương đồng cho về index 0")
+
+            my_config['exmaple_conversation'] = conversation_data[0]
+
     else:
         pass
 
     # Gọi hàm get_conversation với cấu hình đã chọn
     long_term_json = load_long_term_memory()
 
-    response = get_conversation(my_config=my_config, long_term_memory=long_term_json)
+    if retrieve_old_conversation:
+        my_config["David_last_conversation"] = my_config['exmaple_conversation']['conversation'][0]['text']
+        my_config["Choi_last_conversation"] = my_config['exmaple_conversation']['conversation'][1]['text']
+
+        response = get_conversation_with_retrieve(my_config=my_config, long_term_memory=long_term_json)
+    else:
+        response = get_conversation(my_config=my_config, long_term_memory=long_term_json)
 
     summarize_context = response['summarize_context']
     current_conversation = response['next_conversation']

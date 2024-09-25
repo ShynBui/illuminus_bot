@@ -12,10 +12,10 @@ from langchain_openai import ChatOpenAI
 load_dotenv()
 
 # Đường dẫn tới file dữ liệu cuộc hội thoại
-conversation_file_path = os.path.join(os.path.dirname(os.getcwd()), 'data', 'test_data.json') if os.path.exists(os.path.join(os.path.dirname(os.getcwd()), 'data', 'test_data.json')) else os.path.join(os.getcwd(), 'data', 'test_data.json')
+conversation_file_path = os.path.join(os.path.dirname(os.getcwd()), 'data', 'conversation_data.json') if os.path.exists(os.path.join(os.path.dirname(os.getcwd()), 'data', 'conversation_data.json')) else os.path.join(os.getcwd(), 'data', 'conversation_data.json')
 
 # Đường dẫn lưu trữ vector store
-vectorstore_dir = os.path.join(os.path.dirname(os.getcwd()), 'data', 'vectorstore')
+vectorstore_dir = os.path.join(os.path.dirname(os.getcwd()), 'data', 'vectorstore') if os.path.exists(os.path.join(os.path.dirname(os.getcwd()), 'data', 'vectorstore')) else os.path.join(os.getcwd(), 'data', 'vectorstore')
 
 # Metadata field info
 metadata_field_info = [
@@ -39,6 +39,7 @@ metadata_field_info = [
 
 # Hàm load dữ liệu từ file JSON
 def load_conversation(config_path=conversation_file_path):
+    print("Conversation_path:", config_path)
     with open(config_path, 'r', encoding='utf-8') as f:
         conversation = json.load(f)
     return conversation
@@ -80,14 +81,14 @@ def create_or_load_vectorstore_and_retriever(conversation_data, update=False):
         # Nếu đã tồn tại, tải lại vectorstore từ ổ đĩa
         vectorstore = Chroma(persist_directory=vectorstore_dir,
                              embedding_function=OpenAIEmbeddings(model=embedding_model, openai_api_key=openai_api_key))
-        print("Vectorstore loaded from disk.")
+        print(f"Vectorstore loaded from disk: {vectorstore_dir}")
     else:
         # Nếu chưa tồn tại, tạo documents và lưu lại vectorstore
         documents = create_documents_from_data(conversation_data)
         vectorstore = Chroma.from_documents(documents,
                                             OpenAIEmbeddings(model=embedding_model, openai_api_key=openai_api_key),
                                             persist_directory=vectorstore_dir)
-        print("Vectorstore created and saved to disk.")
+        print(f"Vectorstore created and saved to disk: {vectorstore_dir}.")
 
     # Cập nhật vectorstore nếu cần
     if update:
