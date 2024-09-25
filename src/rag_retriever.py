@@ -12,7 +12,7 @@ from langchain_openai import ChatOpenAI
 load_dotenv()
 
 # Đường dẫn tới file dữ liệu cuộc hội thoại
-conversation_file_path = os.path.join(os.path.dirname(os.getcwd()), 'data', 'test_data.json')
+conversation_file_path = os.path.join(os.path.dirname(os.getcwd()), 'data', 'test_data.json') if os.path.exists(os.path.join(os.path.dirname(os.getcwd()), 'data', 'test_data.json')) else os.path.join(os.getcwd(), 'data', 'test_data.json')
 
 # Đường dẫn lưu trữ vector store
 vectorstore_dir = os.path.join(os.path.dirname(os.getcwd()), 'data', 'vectorstore')
