@@ -1,78 +1,52 @@
 import unittest
-from unittest.mock import patch, MagicMock
-from pkgs import QuotaManager
+from unittest.mock import patch, mock_open, MagicMock
+import os
+import json
+from src import load_conversation, create_documents_from_data, create_or_load_vectorstore_and_retriever
+
+class TestConversationRetrieval(unittest.TestCase):
+
+    # Mock the environment variables
+    @patch.dict(os.environ, {
+        'OPEN_AI_KEY': 'mock_openai_key',
+        'EMBEDDING_MODEL': 'mock_embedding_model',
+        'LLM_MODEL': 'mock_gpt_model'
+    })
+    @patch('builtins.open', new_callable=mock_open, read_data=json.dumps([{
+        "previous_context": "context1",
+        "topic": "health",
+        "language": "English",
+        "conversation": [
+            {"speaker": "David", "emotion": "happy", "text": "I'm feeling great!"},
+            {"speaker": "Choi", "emotion": "concerned", "text": "That's good to hear!"}
+        ]
+    }]))
+    def test_load_conversation(self, mock_file):
+        # Test load_conversation function
+        result = load_conversation()
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["topic"], "health")
+        self.assertEqual(result[0]["language"], "English")
+
+    def test_create_documents_from_data(self):
+        # Test create_documents_from_data function with mock data
+        mock_data = [{
+            "previous_context": "context1",
+            "topic": "health",
+            "language": "English",
+            "conversation": [
+                {"speaker": "David", "emotion": "happy", "text": "I'm feeling great!"},
+                {"speaker": "Choi", "emotion": "concerned", "text": "That's good to hear!"}
+            ]
+        }]
+        documents = create_documents_from_data(mock_data)
+        self.assertEqual(len(documents), 1)
+        self.assertIn("David (happy): I'm feeling great!", documents[0].page_content)
+        self.assertIn("Choi (concerned): That's good to hear!", documents[0].page_content)
+        self.assertEqual(documents[0].metadata["topic"], "health")
+        self.assertEqual(documents[0].metadata["language"], "English")
 
 
-class TestQuotaManager(unittest.TestCase):
-
-    @patch('os.getenv')
-    def test_quota_manager_initialization(self, mock_getenv):
-        mock_getenv.return_value = "fake_api_key"
-
-        # Khởi tạo QuotaManager
-        model_name = "gpt-3.5-turbo"
-        api_keys = ["api_key_1", "api_key_2"]
-        manager = QuotaManager(model_name, api_keys)
-
-        # Kiểm tra xem class có khởi tạo đúng không
-        self.assertEqual(manager.api_keys, api_keys)
-        self.assertEqual(manager.current_key_index, 0)
-        self.assertEqual(manager.use_quota, False)
-        self.assertFalse(manager.use_quota)
-
-    @patch('os.getenv')
-    def test_quota_manager_gemini_initialization(self, mock_getenv):
-        mock_getenv.return_value = "fake_api_key"
-
-        # Khởi tạo QuotaManager với mô hình gemini
-        model_name = "gemini"
-        api_keys = ["api_key_1", "api_key_2"]
-        manager = QuotaManager(model_name, api_keys)
-
-        # Kiểm tra xem class có khởi tạo đúng không
-        self.assertEqual(manager.api_keys, api_keys)
-        self.assertEqual(manager.current_key_index, 0)
-        self.assertTrue(manager.use_quota)
-
-    @patch('os.environ', {})
-    def test_rotate_api_key(self):
-        # Khởi tạo QuotaManager với nhiều API keys
-        model_name = "gemini"
-        api_keys = ["api_key_1", "api_key_2", "api_key_3"]
-        manager = QuotaManager(model_name, api_keys)
-
-        # Xoay vòng API key và kiểm tra
-        manager.rotate_api_key()
-        self.assertEqual(manager.api_key, "api_key_2")
-
-        manager.rotate_api_key()
-        self.assertEqual(manager.api_key, "api_key_3")
-
-        manager.rotate_api_key()
-        self.assertEqual(manager.api_key, "api_key_1")  # Quay lại key đầu tiên
-
-    @patch('pkgs.LangChainExecutor.execute')
-    @patch('os.getenv')
-    def test_execute_with_quota_rotation(self, mock_getenv, mock_execute):
-        mock_getenv.return_value = "fake_api_key"
-
-        # Giả lập lỗi 429 từ lần gọi đầu tiên
-        mock_execute.side_effect = [Exception("429 Too Many Requests"), "Successful Response"]
-
-        # Khởi tạo QuotaManager
-        model_name = "gemini"
-        api_keys = ["api_key_1", "api_key_2"]
-        manager = QuotaManager(model_name, api_keys)
-
-        result = manager.execute("input", "user input")
-
-        # Kiểm tra rằng API key đã xoay vòng và kết quả cuối cùng thành công
-        self.assertEqual(manager.api_key, "api_key_2")
-        self.assertEqual(result, "Successful Response")
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     runner = unittest.TextTestRunner(verbosity=2)
     unittest.main(testRunner=runner, verbosity=2)
-
-
