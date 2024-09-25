@@ -65,14 +65,14 @@ def remove_local_paths(file_path):
 
 if __name__ == "__main__":
     # Gọi hàm với đường dẫn đến file requirements.txt của bạn
-    # file_path = 'requirements.txt'  # Thay thế bằng đường dẫn thực tế của bạn
-    # remove_local_paths(file_path)
+    file_path = 'requirements.txt'  # Thay thế bằng đường dẫn thực tế của bạn
+    remove_local_paths(file_path)
 
     folder_path = r"D:\illuminus_bot"
-
-    output_file = "folder_structure.xml"
-
-    # Gọi hàm để tạo XML
-    # generate_folder_xml(folder_path, output_file)
-
-    parse_and_print_xml(output_file)
+    #
+    # output_file = "folder_structure.xml"
+    #
+    # # Gọi hàm để tạo XML
+    # # generate_folder_xml(folder_path, output_file)
+    #
+    # parse_and_print_xml(output_file)
