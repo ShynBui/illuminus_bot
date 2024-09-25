@@ -50,29 +50,31 @@ def remove_local_paths(file_path):
     with open(file_path, 'r', encoding='utf-16') as f:
         lines = f.readlines()
 
-    print(lines)
+    print(lines)  # In ra để kiểm tra
 
     for line in lines:
-        # Kiểm tra xem dòng có chứa '@ file:' hay không
-        if '@ file:' not in line:
-            # Chỉ giữ lại dòng nếu không chứa '@ file:'
-            cleaned_lines.append(line)
+        # Kiểm tra xem dòng có chứa '@' hay không
+        if '@' in line:
+            # Nếu dòng chứa '@', chỉ giữ lại phần tên thư viện trước ký tự '@'
+            line = line.split('@')[0].strip() + '\n'
+        cleaned_lines.append(line)
 
     # Ghi kết quả vào file mới hoặc file gốc
-    with open(file_path, 'w') as f:
+    with open(file_path, 'w', encoding='utf-16') as f:
         f.writelines(cleaned_lines)
+
 
 
 if __name__ == "__main__":
     # Gọi hàm với đường dẫn đến file requirements.txt của bạn
-    # file_path = 'requirements.txt'  # Thay thế bằng đường dẫn thực tế của bạn
-    # remove_local_paths(file_path)
+    file_path = 'requirements.txt'  # Thay thế bằng đường dẫn thực tế của bạn
+    remove_local_paths(file_path)
     #
-    folder_path = r"D:\illuminus_bot"
-    #
-    output_file = "folder_structure.xml"
+    # folder_path = r"D:\illuminus_bot"
+    # #
+    # output_file = "folder_structure.xml"
 
     # Gọi hàm để tạo XML
-    generate_folder_xml(folder_path, output_file)
+    # generate_folder_xml(folder_path, output_file)
 
-    parse_and_print_xml(output_file)
+    # parse_and_print_xml(output_file)

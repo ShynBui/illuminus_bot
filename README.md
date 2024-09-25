@@ -47,7 +47,7 @@ The system operates by combining **RAG (Retrieval-Augmented Generation)** with l
 https://github.com/ShynBui/illuminus_bot.git
 cd \illuminus_bot
 ``` 
-2. **Install dependencies**:
+2. **Install dependencies (Make sure that you have a gpu)**:
 ```bash
 pip install -r requirements.txt
 ```
