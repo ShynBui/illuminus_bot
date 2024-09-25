@@ -1,14 +1,19 @@
 import gradio as gr
 import json
 import os
+import logging
 from huggingface_hub import InferenceClient
 from src.chatbot import get_conversation, get_conversation_with_retrieve
-from src import load_config_and_select, analysis_message, check_if_have_infor, gen_long_term_memory, load_long_term_memory, load_conversation, create_or_load_vectorstore_and_retriever
+from src import load_config_and_select, analysis_message, check_if_have_infor, gen_long_term_memory, \
+    load_long_term_memory, load_conversation, create_or_load_vectorstore_and_retriever
+
+# Cấu hình logger
+logging.basicConfig(filename=os.path.join(os.getcwd(),'logs','app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Đường dẫn đến file lưu lịch sử cuộc trò chuyện
 conversation_file_path = os.path.join(os.getcwd(), 'data', 'conversation_data.json')
 
-#Load những đoạn hôi thoại mẫu
+# Load những đoạn hội thoại mẫu
 conversation_data = load_conversation()
 
 _, retriever = create_or_load_vectorstore_and_retriever(conversation_data, update=False)
@@ -16,11 +21,14 @@ _, retriever = create_or_load_vectorstore_and_retriever(conversation_data, updat
 
 def load_last_conversation():
     """Đọc tin nhắn gần nhất từ file conversation_data.json"""
+    logging.info("Loading the last conversation from the file.")
     if os.path.exists(conversation_file_path):
         with open(conversation_file_path, 'r') as file:
             conversation_data = json.load(file)
             if conversation_data:
+                logging.info("Successfully loaded last conversation.")
                 return conversation_data[-1]
+    logging.warning("No conversation file found or the conversation is empty.")
     return None
 
 
@@ -36,6 +44,8 @@ def save_conversation(conversation_entry):
     with open(conversation_file_path, 'w') as file:
         json.dump(conversation_data, file, indent=4)
 
+    logging.info(f"Conversation saved: {conversation_entry}")
+
 
 def respond(
         message,
@@ -47,8 +57,11 @@ def respond(
         choi_role,
         retrieve_old_conversation,
 ):
+    logging.info(f"New message received: {message}")
+
     if message != '':  # Nếu người dùng gửi tin nhắn
         message_analyse = analysis_message(message)  # Phân tích tin nhắn
+        logging.info(f"Message analyzed: {message_analyse}")
     else:
         message_analyse = {'previous_context': None,
                            "David's Emotion": None,
@@ -57,13 +70,11 @@ def respond(
                            'Language': None,
                            "Choi's Role": None}
 
-
     last_conversation = load_last_conversation()
     previous_context = last_conversation['previous_context'] if last_conversation else "No previous context available"
     david_last_conversation = last_conversation['conversation'][0]['text'] if last_conversation else ""
     choi_last_conversation = last_conversation['conversation'][1]['text'] if last_conversation else ""
 
-    # Tạo config từ các lựa chọn được chọn trong giao diện Gradio
     my_config = {
         "Choi's Emotion": choi_emotion,
         "David's Emotion": david_emotion,
@@ -79,9 +90,7 @@ def respond(
         if value:
             my_config[item] = value
 
-    # Nếu kích hoạt tính năng retrieve, tiến hành truy vết các hội thoại từ database test_data.json
     if retrieve_old_conversation:
-        #Add more feature
         data_query = f'''David ({my_config["David's Emotion"]}): {my_config["David_last_conversation"]}\nChoi: {my_config["Choi's Emotion"]}: {my_config["Choi_last_conversation"]}
 The conversation in: {language}
 Topic of Conversation: {conversation_topic}
@@ -90,18 +99,12 @@ The previous context: {previous_context}
         try:
             query_in_db = retriever.invoke(data_query)[0]
             get_next_conversation_id = query_in_db.metadata['index']
-            print("simple_id:", get_next_conversation_id)
+            logging.info(f"Retrieved similar conversation with ID: {get_next_conversation_id}")
             my_config['exmaple_conversation'] = conversation_data[int(get_next_conversation_id) + 1]
         except Exception as e:
-            print("Lỗi: ",e)
-            print("Câu tương đồng cho về index 0")
-
+            logging.error(f"Error retrieving conversation: {e}")
             my_config['exmaple_conversation'] = conversation_data[0]
 
-    else:
-        pass
-
-    # Gọi hàm get_conversation với cấu hình đã chọn
     long_term_json = load_long_term_memory()
 
     if retrieve_old_conversation:
@@ -115,10 +118,9 @@ The previous context: {previous_context}
     summarize_context = response['summarize_context']
     current_conversation = response['next_conversation']
 
-    # Tạo response từ summarize_context và current_conversation
     response_text = f"Summary: {summarize_context}\n\nDavid: {current_conversation['David']}\nChoi: {current_conversation['Choi']}"
+    logging.info(f"Response generated: {response_text}")
 
-    # Lưu cuộc trò chuyện vào file JSON
     conversation_entry = {
         "previous_context": summarize_context,
         "topic": conversation_topic,
@@ -139,7 +141,6 @@ The previous context: {previous_context}
     }
     save_conversation(conversation_entry)
 
-    # Update long-term-memory:
     check_important_info = check_if_have_infor(current_conversation)
     str_long_term_mem = '<h1> Long term Memory </h1>'
 
@@ -152,21 +153,19 @@ The previous context: {previous_context}
         for item, value in long_term_json.items():
             str_long_term_mem += f'<b>{item}</b>: {value} <br>\n'
 
-    # Hiển thị tin nhắn của David và Choi trong cùng một box
     combined_message = f"David: {current_conversation['David']}\n\nChoi: {current_conversation['Choi']}"
+    updated_history = history + [(combined_message, "Monitor request: \n" + str(
+        message_analyse) if message != '' else 'Monitor không đưa ra yêu cầu')]
 
-    updated_history = history + [(combined_message, "Monitor request: \n" + str(message_analyse) if message != '' else 'Monitor không đưa ra yêu cầu')]  # Gộp tin nhắn David và Choi lại thành một message trong history
     return updated_history, f"{str_long_term_mem}"
 
 
 with gr.Blocks() as demo:
     with gr.Row():
-        # Cột bên trái: khung chat giữa David và Choi
         with gr.Column(scale=8):
             chatbot = gr.Chatbot(label="Chat between David and Choi")
             message_input = gr.Textbox(label="Enter your message", placeholder="Type your message here")
 
-            # Các lựa chọn cho cảm xúc, chủ đề, ngôn ngữ, và vai trò
             choi_emotion = gr.Dropdown(choices=["comforting", "supportive", "nostalgic", "joyful", "patient"],
                                        value="comforting", label="Choi's Emotion")
             david_emotion = gr.Dropdown(choices=["warm", "confused", "worried", "sad", "humorous"], value="confused",
@@ -181,10 +180,8 @@ with gr.Blocks() as demo:
                                     value="Son", label="Choi's Role")
 
             retrieve_toggle = gr.Checkbox(label="Retrieve old conversation", value=False)
-
             submit_btn = gr.Button("Submit")
 
-        # Cột bên phải: hiển thị tin nhắn của người dùng
         with gr.Column(scale=2):
             user_message_display = gr.HTML("""
             <div style='height: 100%; display: flex; align-items: center; justify-content: center;' id="user_message_display">
@@ -192,23 +189,11 @@ with gr.Blocks() as demo:
             </div>
             """)
 
-
-    # Cập nhật khung chat với tin nhắn của David và Choi, và hiển thị tin nhắn người dùng bên phải khi nhấn nút submit
-    def update_ui(chat_history, user_message):
-        # Cập nhật hiển thị bên phải với tin nhắn của người dùng
-        user_message_display.update(f"""
-        <div style='height: 100%; display: flex; align-items: center; justify-content: center;' id="user_message_display">
-            <p style='font-size: 20px; color: gray;'>Long term memory\n: {user_message}</p>
-        </div>
-        """)
-        # Trả về lịch sử trò chuyện
-        return chat_history
-
-
     submit_btn.click(respond,
                      inputs=[message_input, chatbot, choi_emotion, david_emotion, conversation_topic, language,
-                             choi_role, retrieve_toggle],  # Thêm retrieve_toggle vào đầu vào
+                             choi_role, retrieve_toggle],
                      outputs=[chatbot, user_message_display])
 
 if __name__ == "__main__":
+    logging.info("Launching Gradio application.")
     demo.launch()

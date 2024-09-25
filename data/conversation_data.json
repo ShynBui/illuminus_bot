@@ -2878,5 +2878,131 @@
                 "text": "Of course, Dad. You always loved those. Remember how you used to tell me about your time working in the U.S.? You always said it was exciting, full of adventure. Maybe we can watch one of those movies together and you can tell me more about it."
             }
         ]
+    },
+    {
+        "previous_context": "David is feeling unwell and confused, expressing a heavy head. Choi, in a comforting role, suggests watching old movies to ease his discomfort, knowing David enjoys them. This reflects their shared history and Choi's understanding of David's preferences.",
+        "topic": "David's old job in the U.S.",
+        "language": "English",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "Movies... yes, that sounds nice.  Do you remember when I worked in the U.S.?  I used to watch a lot of movies there.  It was a different time."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "I remember, Dad. You told me about the big city lights and the exciting life you had there.  Maybe we can watch some of those movies you liked from that time.  Would you like that?"
+            }
+        ]
+    },
+    {
+        "previous_context": "David, feeling unwell and confused, expresses a fondness for movies. Choi, in a comforting role, suggests watching old movies, knowing David enjoys them. This leads to David reminiscing about his time working in the U.S., which Choi remembers fondly.",
+        "topic": "Choi's childhood memories",
+        "language": "Mixed English-Korean",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "warm",
+                "text": "It was a different time...  I was so young then.  I remember the streets, the people, the energy.  It was like a dream.  Do you think I was happy there?"
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "joyful",
+                "text": "I know you were, Dad. You always talked about how much you loved the city, the excitement, and the new experiences.  You were always so full of life.  Maybe we can watch some of those movies and relive those memories together.  Would you like that?"
+            }
+        ]
+    },
+    {
+        "previous_context": "David reminisces about his time working in the U.S., feeling warm and nostalgic. Choi, in a joyful and comforting role, reassures him that he was happy during that time and suggests watching old movies together to relive those memories.",
+        "topic": "Choi's childhood memories",
+        "language": "Korean",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "warm",
+                "text": "\uc751, \uc544\ub4e4\uc544. \uadf8\ub54c\ub294 \uc815\ub9d0 \uc80a\uc5c8\uc9c0.  \ubaa8\ub4e0 \uac83\uc774 \uc0c8\ub86d\uace0 \uc2e0\ub0ac\uc5b4.  \uadf8\ub54c\uc758 \uae30\ubd84\uc744 \ub2e4\uc2dc \ub290\ub07c\uace0 \uc2f6\uc5b4."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "joyful",
+                "text": "\uc544\ubc84\uc9c0, \uadf8\ub7fc \uc624\ub298 \uc800\ub141\uc5d0 \uc88b\uc544\ud558\ub294 \ubbf8\uad6d \uc601\ud654\ub97c \uac19\uc774 \ubcf4\ub294 \uac74 \uc5b4\ub54c\uc694?  \uc544\ubc84\uc9c0\uac00 \uc88b\uc544\ud558\uc2dc\ub294 \uc601\ud654 \uc911\uc5d0 \ud558\ub098\ub97c \uace8\ub77c\uc11c \uac19\uc774 \ubd10\uc694.  \uadf8\ub7ec\uba74 \uadf8\ub54c\uc758 \uae30\ubd84\uc744 \ub2e4\uc2dc \ub290\ub07c\uc2e4 \uc218 \uc788\uc744 \uac70\uc608\uc694."
+            }
+        ]
+    },
+    {
+        "previous_context": "David is feeling warm and nostalgic about his time working in the U.S. Choi, in a joyful and comforting role, suggests watching old American movies together to relive those memories. David agrees and expresses a desire to feel those emotions again.",
+        "topic": "Choi's childhood memories",
+        "language": "English",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "warm",
+                "text": "Yes, son.  I remember the excitement of it all.  It was a different time, a new adventure.  I miss that feeling."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "joyful",
+                "text": "Dad, I know you do.  We can watch some of those old movies tonight.  Maybe we can even find some of the ones you used to take me to when I was little.  Remember 'The Godfather'?  We used to watch that together all the time."
+            }
+        ]
+    },
+    {
+        "previous_context": "David is feeling nostalgic about his time working in the U.S. and misses the excitement of that period. Choi, in a joyful and comforting role, suggests watching old American movies together to relive those memories. David agrees and expresses a desire to feel those emotions again. Choi suggests watching 'The Godfather' together, a movie they used to watch as a family.",
+        "topic": "Choi's childhood memories",
+        "language": "Mixed English-Korean",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "warm",
+                "text": "The Godfather...  Ah, yes.  That was a good one.  We used to watch it with your mother, right?  She loved Marlon Brando.  I remember her laughing at his voice.  It was so funny."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "joyful",
+                "text": "Yes, Dad.  You're right.  She loved him.  And you always got so into the movie, especially when Michael Corleone took over.  You'd say, 'He's just like me, a man of action!'  We can watch it again tonight.  It'll be like old times."
+            }
+        ]
+    },
+    {
+        "previous_context": "David is reminiscing about watching 'The Godfather' with his wife and son. He remembers his wife's fondness for Marlon Brando and his own enjoyment of the movie, particularly Michael Corleone's character. Choi, in a joyful and nostalgic tone, agrees with David and suggests watching the movie again to relive those memories.",
+        "topic": "Choi's childhood memories",
+        "language": "Mixed English-Korean",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "warm",
+                "text": "Yes, 'The Godfather'...  It was a different time.  So much energy, so much excitement.  I miss those days.  I miss your mother.  She was always so full of life."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "joyful",
+                "text": "I know, \uc544\ubc84\uc9c0.  She was.  And you were too.  You were always so full of energy, always working hard, always chasing your dreams.  We can watch the movie tonight, and maybe we can talk about those days.  It'll be good to remember."
+            }
+        ]
+    },
+    {
+        "previous_context": "David is feeling unwell and confused. Choi, in a comforting role, suggests watching old movies to cheer him up, knowing David enjoys them. This conversation follows a previous discussion about 'The Godfather' and David's fondness for the movie.",
+        "topic": "David's old job in the U.S.",
+        "language": "Mixed English-Korean",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "Old movies... yes, I remember. But... I don't remember what I did before. What was my job again? I think I worked in America, but I can't remember what I did."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "It's okay, \uc544\ubc84\uc9c0. You worked so hard for us. You were a great provider. Remember how you used to tell me stories about your time in America? We can watch those old movies and maybe those memories will come back to you."
+            }
+        ]
     }
 ]

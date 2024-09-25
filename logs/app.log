@@ -1,0 +1,24 @@
+2024-09-25 22:54:27,963 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2024-09-25 22:54:29,210 - INFO - Launching Gradio application.
+2024-09-25 22:54:29,475 - INFO - HTTP Request: GET http://127.0.0.1:7861/startup-events "HTTP/1.1 200 OK"
+2024-09-25 22:54:29,488 - INFO - HTTP Request: HEAD http://127.0.0.1:7861/ "HTTP/1.1 200 OK"
+2024-09-25 22:54:29,589 - INFO - HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-09-25 22:54:29,849 - INFO - HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-09-25 22:54:30,313 - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-09-25 22:56:59,304 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2024-09-25 22:57:00,533 - INFO - Launching Gradio application.
+2024-09-25 22:57:00,803 - INFO - HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-09-25 22:57:00,806 - INFO - HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-09-25 22:57:00,807 - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-09-25 22:57:01,633 - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-09-25 22:57:11,758 - INFO - New message received: 
+2024-09-25 22:57:11,758 - INFO - Loading the last conversation from the file.
+2024-09-25 22:57:11,760 - INFO - Successfully loaded last conversation.
+2024-09-25 22:57:14,274 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-25 22:57:15,032 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-25 22:57:15,081 - ERROR - Error retrieving conversation: list index out of range
+2024-09-25 22:57:16,882 - INFO - Response generated: Summary: David is feeling unwell and confused. Choi, in a comforting role, suggests watching old movies to cheer him up, knowing David enjoys them. This conversation follows a previous discussion about 'The Godfather' and David's fondness for the movie.
+
+David: Old movies... yes, I remember. But... I don't remember what I did before. What was my job again? I think I worked in America, but I can't remember what I did.
+Choi: It's okay, \uc544\ubc84\uc9c0. You worked so hard for us. You were a great provider. Remember how you used to tell me stories about your time in America? We can watch those old movies and maybe those memories will come back to you.
+2024-09-25 22:57:16,890 - INFO - Conversation saved: {'previous_context': "David is feeling unwell and confused. Choi, in a comforting role, suggests watching old movies to cheer him up, knowing David enjoys them. This conversation follows a previous discussion about 'The Godfather' and David's fondness for the movie.", 'topic': "David's old job in the U.S.", 'language': 'Mixed English-Korean', 'conversation': [{'speaker': 'David', 'emotion': 'confused', 'text': "Old movies... yes, I remember. But... I don't remember what I did before. What was my job again? I think I worked in America, but I can't remember what I did."}, {'speaker': 'Choi', 'role': 'Son', 'emotion': 'comforting', 'text': "It's okay, \uc544\ubc84\uc9c0. You worked so hard for us. You were a great provider. Remember how you used to tell me stories about your time in America? We can watch those old movies and maybe those memories will come back to you."}]}
