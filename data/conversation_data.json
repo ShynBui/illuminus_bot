@@ -2662,5 +2662,221 @@
                 "text": "That sounds wonderful, \uc544\ubc84\uc9c0.  We can do all those things and more.  We can create new memories that are just as warm and comforting as the ones we have.  And remember, you're not alone in this journey.  I'm here with you, every step of the way.  We'll face this together, and we'll create new memories that will bring us joy and peace.  What do you say we start with a walk in the park tomorrow?  We can listen to some music and enjoy the fresh air."
             }
         ]
+    },
+    {
+        "previous_context": "David is struggling with memory loss and is trying to recall the name of a restaurant. Choi, in a comforting role, helps him remember by sharing a funny memory of David taking him to the restaurant and him playing with the steak knife. This brings a smile to David's face, reminding him of their shared experiences.",
+        "topic": "David's old job in the U.S.",
+        "language": "Mixed English-Korean",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "\uc544, \ub9de\uc544! \uc2a4\ud14c\uc774\ud06c \uce7c\ub85c \uc7a5\ub09c\ucce4\uc9c0. \u314b\u314b\u314b \ub108\ubb34 \uc6c3\uacbc\uc5b4. \uadf8\ub54c \ub108 \uc5c4\uccad \uadc0\uc5ec\uc6e0\uc5b4. \uadf8 \ub808\uc2a4\ud1a0\ub791 \uc774\ub984\uc774... \ubb50\uc600\ub354\ub77c? \uac11\uc790\uae30 \uc0dd\uac01\uc774 \uc548 \ub098\ub124."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "\uad1c\ucc2e\uc544\uc694, \uc544\ubc84\uc9c0. \uae30\uc5b5\uc774 \uc548 \ub098\ub3c4 \uad1c\ucc2e\uc544\uc694. \uc6b0\ub9ac\ub294 \uadf8\ub54c \uc2a4\ud14c\uc774\ud06c\ub97c \uba39\uc5c8\uace0, \uc6c3\uc5c8\uace0, \uc88b\uc740 \uc2dc\uac04\uc744 \ubcf4\ub0c8\uc796\uc544\uc694. \uadf8\uac8c \uc911\uc694\ud574\uc694. \uadf8\ub9ac\uace0 \uc544\ubc84\uc9c0, \uc6b0\ub9ac\ub294 \uc55e\uc73c\ub85c\ub3c4 \uc88b\uc740 \ucd94\uc5b5 \ub9ce\uc774 \ub9cc\ub4e4 \uc218 \uc788\uc5b4\uc694. \ub2e4\uc74c\uc5d0 \ub610 \uc2a4\ud14c\uc774\ud06c \uba39\uc73c\ub7ec \uac00\uc694! \uc5b4\ub54c\uc694?"
+            }
+        ]
+    },
+    {
+        "previous_context": "David is struggling to remember the name of a restaurant he took Choi to. Choi, in a comforting role, reminds him of the fun they had there, playing with the steak knife. This brings a smile to David's face, reminding him of their shared experiences. Choi reassures him that it's okay not to remember everything and that they can create more memories together.",
+        "topic": "David's old job in the U.S.",
+        "language": "Mixed English-Korean",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "Yeah, the steak knife... it was so funny. You were so little.  I remember... I used to work in the U.S. before I came back here. I worked in a big building, with lots of people. I was a... a... what was I again?  I can't remember."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "It's okay, \uc544\ubc84\uc9c0. You were a great dad, no matter what you did.  Do you remember what you liked about working there?  Maybe that will help you remember your job title.  We can talk about it, or maybe look at some old pictures from that time.  What do you think?"
+            }
+        ]
+    },
+    {
+        "previous_context": "David is struggling to remember his old job in the U.S. He remembers working in a big building with lots of people but can't recall his job title. Choi, in a comforting role, reassures him that it's okay not to remember everything and suggests talking about it or looking at old pictures to jog his memory.",
+        "topic": "David's old job in the U.S.",
+        "language": "Mixed English-Korean",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "I... I liked the people. They were all so friendly.  I remember... I used to go to this... this...  I can't remember the name of the place.  It was a... a...  I think it was a bar.  We used to go there after work.  It was fun.  I think... I think I had a good time there."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "It sounds like you had a good time, \uc544\ubc84\uc9c0.  Maybe we can look at some old pictures together.  We can try to find that bar, or maybe even find some of your old colleagues.  It might help you remember more.  What do you think?"
+            }
+        ]
+    },
+    {
+        "previous_context": "David is struggling to remember details about his old job in the U.S., particularly the name of a bar he frequented with colleagues. He remembers enjoying the camaraderie and having a good time. Choi, in a comforting role, encourages him to look at old pictures or try to find his former colleagues to jog his memory.",
+        "topic": "David's old job in the U.S.",
+        "language": "English",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "Yes, yes... pictures.  That's a good idea.  I think... I think I have some old photos somewhere.  Maybe... maybe they'll help me remember.  I... I just can't seem to remember the name of that bar.  It was... it was a nice place.  I liked it."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "It's okay, \uc544\ubc84\uc9c0.  We can look at them together.  Maybe we can even find some old photos of you with your colleagues.  It might bring back some good memories.  We can take our time, and if you don't remember everything, that's okay too.  We can just enjoy looking at the pictures and remembering the good times."
+            }
+        ]
+    },
+    {
+        "previous_context": "David is confused about his past experiences in the U.S., specifically about his understanding of 'kimchi'. Choi, in a comforting role, reassures him that it's understandable to be confused and that he has adapted well to Korean culture.",
+        "topic": "David's old job in the U.S.",
+        "language": "English",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "I guess I was just so focused on work. I miss those days, you know? The camaraderie, the laughter... It was a good time."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "I know you miss it, \uc544\ubc84\uc9c0. Maybe we can look at some old pictures together. It might help you remember some of the details. Or maybe we can try to find some of your old colleagues. What do you think?"
+            }
+        ]
+    },
+    {
+        "previous_context": "David is confused about his past experiences in the U.S., specifically about his understanding of 'kimchi'. Choi, in a comforting role, reassures him that it's understandable to be confused and that he has adapted well to Korean culture. David shares a humorous anecdote about his misunderstanding of 'kimchi' and Choi responds with understanding and humor.",
+        "topic": "David's old job in the U.S.",
+        "language": "English",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "Speaking of learning, I miss my old job. I used to work with such a great team. We'd laugh all the time, even when things got tough. Do you remember how we used to have those big potlucks? Everyone would bring their favorite dishes, and we'd all share and talk."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "I remember you telling me about those potlucks. It sounds like you had a lot of fun with your colleagues. Maybe we can have a potluck here at home sometime, just the two of us. We can make some of your favorite dishes and share stories."
+            }
+        ]
+    },
+    {
+        "previous_context": "David is feeling confused and unwell, expressing a heavy head. Choi, in a comforting role, suggests watching old movies to ease his discomfort, knowing David enjoys them. This reflects their shared history and Choi's understanding of David's preferences.",
+        "topic": "David's old job in the U.S.",
+        "language": "English",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "Maybe... maybe we could watch that old movie about the factory workers? The one with the big potluck at the end. I miss those potlucks. Everyone brought their favorite dishes, and we all laughed and talked."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "I remember that movie! You always loved the part where they all shared their stories and food. It sounds like you miss your old workmates, Dad. Maybe we can have a potluck of our own sometime. We can even make some kimchi together, just like you used to make in America."
+            }
+        ]
+    },
+    {
+        "previous_context": "David is feeling unwell and confused, expressing a heavy head. Choi, in a comforting role, suggests watching old movies to ease his discomfort, knowing David enjoys them. This reflects their shared history and Choi's understanding of David's preferences.",
+        "topic": "David's old job in the U.S.",
+        "language": "Korean",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "\uc601\ud654... \uc601\ud654 \ub9d0\uc774\uc57c. \ubbf8\uad6d\uc5d0\uc11c \uc77c\ud560 \ub54c, \ud1f4\uadfc \ud6c4\uc5d0 \ud56d\uc0c1 \uc601\ud654\ub97c \ubcf4\ub7ec \uac14\uc5c8\uc9c0. \uc61b\ub0a0 \uc0dd\uac01\uc774 \ub098\ub124."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "\ub9de\uc544\uc694, \uc544\ubc84\uc9c0. \uadf8\ub54c \uc77c \uc774\uc57c\uae30 \ub9ce\uc774 \ud574\uc8fc\uc168\uc796\uc544\uc694. \uc544\ubc84\uc9c0\uac00 \uc5bc\ub9c8\ub098 \uc5f4\uc815\uc801\uc73c\ub85c \uc77c\ud558\uc168\ub294\uc9c0, \uadf8\ub9ac\uace0 \ub3d9\ub8cc\ub4e4\uacfc \uc5bc\ub9c8\ub098 \uc990\uac70\uc6b4 \uc2dc\uac04\uc744 \ubcf4\ub0b4\uc168\ub294\uc9c0. \uadf8\ub54c \uc774\uc57c\uae30 \ub610 \ud574\uc8fc\uc138\uc694."
+            }
+        ]
+    },
+    {
+        "previous_context": "David is feeling unwell and confused, expressing a heavy head. Choi, in a comforting role, suggests watching old movies to ease his discomfort, knowing David enjoys them. This reflects their shared history and Choi's understanding of David's preferences.",
+        "topic": "David's old job in the U.S.",
+        "language": "English",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "Movies... yes, that sounds nice.  Do you remember when I worked in the U.S.?  I used to love going to the movies with my colleagues after work.  We'd laugh and talk about the films for hours."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "I do, Dad. You always told me stories about your time in the U.S.  You seemed so happy there.  Maybe we can watch some old American movies together and you can tell me more about your work."
+            }
+        ]
+    },
+    {
+        "previous_context": "David is feeling unwell and confused, expressing a heavy head. Choi, in a comforting role, suggests watching old movies to ease his discomfort, knowing David enjoys them. This reflects their shared history and Choi's understanding of David's preferences.",
+        "topic": "David's old job in the U.S.",
+        "language": "English",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "Movies... yes, that sounds nice.  Do you remember when I worked in the U.S.?  I used to love going to the movies with my colleagues after work.  We'd laugh and talk about everything."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "I remember you telling me about those days. You always seemed so happy there.  Maybe we can watch some old American movies tonight, and you can tell me more about your work.  It would be nice to hear about those times again."
+            }
+        ]
+    },
+    {
+        "previous_context": "David is feeling unwell and confused, expressing a heavy head. Choi, in a comforting role, suggests watching old movies to ease his discomfort, knowing David enjoys them. This reflects their shared history and Choi's understanding of David's preferences.",
+        "topic": "David's old job in the U.S.",
+        "language": "English",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "Movies... yes, that sounds nice.  Do you remember when I worked in the U.S.?  I used to love going to the movies there.  It was always so exciting."
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "I do, Dad. You always told me about the big screens and the popcorn.  Maybe we can watch some American movies together.  It'll be like going back to those days."
+            }
+        ]
+    },
+    {
+        "previous_context": "David is feeling unwell and confused, expressing a heavy head. Choi, in a comforting role, suggests watching old movies to ease his discomfort, knowing David enjoys them. This reflects their shared history and Choi's understanding of David's preferences.",
+        "topic": "David's old job in the U.S.",
+        "language": "English",
+        "conversation": [
+            {
+                "speaker": "David",
+                "emotion": "confused",
+                "text": "Movies... yes, movies.  Do you remember those old American movies we used to watch? The ones with the cowboys and the big hats?"
+            },
+            {
+                "speaker": "Choi",
+                "role": "Son",
+                "emotion": "comforting",
+                "text": "Of course, Dad. You always loved those. Remember how you used to tell me about your time working in the U.S.? You always said it was exciting, full of adventure. Maybe we can watch one of those movies together and you can tell me more about it."
+            }
+        ]
     }
 ]
